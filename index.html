@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="es-DO">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" type="image/webp" href="/img/logo.webp">
+<meta property="og:title" content="Mitre Restaurant &amp; Bar">
+<meta property="og:description" content="Food, drinks &amp; music terrace. Pide en línea y paga con un toque.">
+<meta property="og:image" content="https://mitre.sandscap.com.do/img/hero.webp">
+<title>Mitre Restaurant &amp; Bar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Jost:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://piezza.sandscap.com.do/brinco/v1/kit.css">
+<script src="https://piezza.sandscap.com.do/brinco/v1/kit.js" defer></script>
+<style>
+/* Layout: tienda estilo app de delivery — portada, ficha del negocio, destacados en carrusel, pestañas fijas y filas de platos con foto a la derecha; carrito como panel lateral / hoja inferior. */
+:root{
+  --bg:#FFFFFF; --ink:#0B0B0B; --muted:#5E5E5E; --faint:#8E8E8E; --line:#ECECEC; --chip:#F3F3F3; --card:#FFFFFF;
+  --accent:#0B0B0B; --on-accent:#FFFFFF; --warm:#B5195F; --warm-bg:#FCE8F1; --ok:#0E8A4F; --brinco:#004EED; --scrim:rgba(0,0,0,.5);
+  --f:'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif; --f-brand:'Jost','Futura',system-ui,sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0F0F10; --ink:#F4F4F4; --muted:#B0B0B0; --faint:#8A8A8A; --line:#262628; --chip:#1E1E20; --card:#161618;
+  --accent:#F4F4F4; --on-accent:#0B0B0B; --warm:#F07AB0; --warm-bg:#331A27; --ok:#3CC985; --brinco:#6F9BFF; --scrim:rgba(0,0,0,.65); color-scheme: dark } }
+:root[data-theme="dark"]{
+  --bg:#0F0F10; --ink:#F4F4F4; --muted:#B0B0B0; --faint:#8A8A8A; --line:#262628; --chip:#1E1E20; --card:#161618;
+  --accent:#F4F4F4; --on-accent:#0B0B0B; --warm:#F07AB0; --warm-bg:#331A27; --ok:#3CC985; --brinco:#6F9BFF; --scrim:rgba(0,0,0,.65); color-scheme: dark }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brinco);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.num{font-variant-numeric:tabular-nums}
+
+/* barra superior */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:8;background:var(--bg);border-bottom:1px solid transparent;transition:border-color .2s}
+.top.scrolled{border-color:var(--line)}
+.top .wrap{display:flex;align-items:center;gap:12px;height:64px}
+.brandmini{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.brandmini img{width:34px;height:34px;border-radius:999px;object-fit:cover}
+.brandmini b{font-family:var(--f-brand);letter-spacing:.16em;font-weight:500;font-size:15px;white-space:nowrap}
+.spacer{flex:1}
+.tlink{display:inline-flex;align-items:center;height:44px;padding:0 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:14px}
+.tlink:hover{background:var(--chip)}
+.cartbtn{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;border:0;background:var(--accent);color:var(--on-accent);font-weight:700;cursor:pointer}
+.cartbtn svg{width:18px;height:18px}
+@media (max-width:560px){.tlink.hide-s{display:none}}
+
+/* aviso */
+.notice{background:var(--chip);font-size:13px;color:var(--muted)}
+.notice .wrap{padding-block:8px}
+
+/* portada */
+.cover{position:relative;margin-top:8px}
+.cover .img{height:clamp(170px,26vw,300px);border-radius:16px;background:#2a1d12 url(img/hero.webp) center 45%/cover}
+.cover .logo{position:absolute;left:24px;bottom:-34px;width:84px;height:84px;border-radius:999px;border:4px solid var(--bg);object-fit:cover;background:#D52E7B;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+@media (max-width:640px){.cover{margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)))}.cover .img{border-radius:0}.cover .logo{left:16px;width:72px;height:72px;bottom:-28px}}
+
+.info{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 28px;align-items:end;padding-top:48px}
+@media (max-width:760px){.info{grid-template-columns:minmax(0,1fr)}}
+.info h1{margin:0;font-size:clamp(28px,4vw,38px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.info .sub{margin-top:6px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 8px}
+.info .sub span+span::before{content:"·";margin-right:8px;color:var(--faint)}
+.tagline{margin-top:10px;font-size:15px;color:var(--ink);max-width:60ch}
+.modebox{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.seg{display:inline-grid;grid-template-columns:1fr 1fr;background:var(--chip);border-radius:999px;padding:4px}
+.seg button{border:0;background:none;border-radius:999px;height:40px;padding:0 20px;font-weight:700;cursor:pointer}
+.seg button[aria-checked="true"]{background:var(--card);box-shadow:0 1px 4px rgba(0,0,0,.14)}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%;max-width:420px}
+.fact{border:1px solid var(--line);border-radius:12px;padding:8px 12px;min-width:0}
+.fact b{display:block;font-size:15px}
+.fact span{font-size:12.5px;color:var(--muted)}
+
+/* buscador */
+.searchrow{margin-top:22px;display:flex;gap:10px;align-items:center}
+.search{flex:1;display:flex;align-items:center;gap:10px;background:var(--chip);border-radius:999px;height:48px;padding:0 16px}
+.search svg{width:18px;height:18px;flex:none;color:var(--muted)}
+.search input{flex:1;border:0;background:none;outline:none;min-width:0;font-size:15px}
+.search input::placeholder{color:var(--faint)}
+
+/* destacados */
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:30px 0 12px}
+.sec-h h2{margin:0;font-size:22px;font-weight:800;letter-spacing:-.01em}
+.sec-h small{color:var(--muted);font-size:13px}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(200px,1fr);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+@media (min-width:900px){.rail{grid-auto-columns:calc((100% - 3*14px)/4)}}
+.feat{scroll-snap-align:start;text-align:left;border:0;background:none;padding:0;cursor:pointer;min-width:0}
+.feat .ph{position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:var(--chip)}
+.feat .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
+.feat:hover .ph img{transform:scale(1.03)}
+.feat .nm{margin-top:8px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.feat .pr{color:var(--muted);font-size:14px}
+
+/* pestañas */
+.tabs{position:sticky;top:calc(64px + env(safe-area-inset-top,0px));z-index:7;background:var(--bg);border-bottom:1px solid var(--line);margin-top:28px}
+.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.tabs .wrap::-webkit-scrollbar{display:none}
+.tab{flex:none;border:0;background:none;height:48px;padding:0 12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent}
+.tab[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+
+/* menú */
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:36px;padding-block:8px 120px}
+@media (min-width:1024px){.layout{grid-template-columns:minmax(0,1fr) 340px}}
+.cat{scroll-margin-top:calc(120px + env(safe-area-inset-top,0px));padding-top:22px}
+.cat h3{margin:0 0 4px;font-size:22px;font-weight:800;letter-spacing:-.01em}
+.cat .cnt{color:var(--muted);font-size:13px;margin-bottom:10px}
+.rows{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:0 24px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;text-align:left;border:0;border-bottom:1px solid var(--line);background:none;padding:16px 0;cursor:pointer;width:100%}
+.row:hover .rn{text-decoration:underline;text-underline-offset:3px}
+.rn{font-weight:700;font-size:16px}
+.rp{margin-top:2px;font-size:14.5px}
+.rd{margin-top:4px;color:var(--muted);font-size:13.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tag{display:inline-block;margin-top:6px;font-size:12px;font-weight:700;color:var(--warm);background:var(--warm-bg);border-radius:6px;padding:2px 8px}
+.rimg{position:relative;width:116px;height:116px;border-radius:12px;background:var(--chip)}
+.rimg img{width:100%;height:100%;object-fit:cover;border-radius:12px;display:block}
+.rimg.none{width:44px;height:44px;background:none}
+.plus{position:absolute;right:8px;bottom:8px;width:36px;height:36px;border-radius:999px;background:var(--card);color:var(--ink);display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.22);font-size:22px;line-height:1;font-weight:500}
+.rimg.none .plus{right:0;bottom:0;position:absolute;border:1px solid var(--line);box-shadow:none}
+.qb{position:absolute;right:8px;bottom:8px;min-width:36px;height:36px;border-radius:999px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-weight:800;padding:0 10px}
+.rimg.none .qb{right:0;bottom:0}
+.empty-s{padding:40px 0;color:var(--muted)}
+
+/* carrito lateral (escritorio) */
+.side{display:none}
+@media (min-width:1024px){.side{display:block;position:sticky;top:calc(132px + env(safe-area-inset-top,0px));align-self:start;margin-top:22px;border:1px solid var(--line);border-radius:16px;padding:18px}}
+.side h4,.sheet h4{margin:0 0 12px;font-size:20px;font-weight:800}
+.cl{display:flex;flex-direction:column;gap:14px}
+.ci{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:12px;align-items:center}
+.ci img,.ci .ph0{width:52px;height:52px;border-radius:10px;object-fit:cover;background:var(--chip)}
+.ci .n{font-weight:700;font-size:14.5px}
+.ci .x{font-size:12.5px;color:var(--muted)}
+.ci .p{font-size:14px;margin-top:2px}
+.step{display:inline-flex;align-items:center;background:var(--chip);border-radius:999px}
+.step button{width:34px;height:34px;border:0;background:none;cursor:pointer;font-size:18px;line-height:1}
+.step span{min-width:18px;text-align:center;font-weight:700;font-size:14px}
+.cempty{color:var(--muted);font-size:14px;padding:12px 0 4px}
+.ctot{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:16px;padding-top:12px;font-weight:700}
+.cnote{font-size:12.5px;color:var(--muted);margin-top:4px}
+.go{margin-top:14px;width:100%;height:54px;border:0;border-radius:12px;background:var(--accent);color:var(--on-accent);font-weight:800;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:0 18px}
+.go[disabled]{opacity:.35;cursor:not-allowed}
+.pay-hint{margin-top:10px;font-size:12.5px;color:var(--muted);text-align:center}
+.bwm{font-family:'Sora',var(--f);font-weight:800;letter-spacing:-.02em;color:var(--brinco)}
+
+/* barra inferior (celular) */
+.vbar{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:linear-gradient(to top,var(--bg) 70%,transparent)}
+.vbar button{width:100%;height:56px;border:0;border-radius:14px;background:var(--accent);color:var(--on-accent);font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.vbar .cnt{display:inline-grid;place-items:center;min-width:28px;height:28px;border-radius:999px;background:var(--on-accent);color:var(--accent);font-size:14px;padding:0 8px}
+@media (min-width:1024px){.vbar{display:none}}
+
+/* modales */
+.scrim{position:fixed;inset:0;z-index:40;background:var(--scrim);display:flex;align-items:flex-end;justify-content:center}
+@media (min-width:640px){.scrim{align-items:center;padding:24px}}
+.modal{width:100%;max-width:520px;max-height:92vh;overflow:auto;background:var(--card);border-radius:20px 20px 0 0;position:relative}
+@media (min-width:640px){.modal{border-radius:20px}}
+.mx{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:999px;border:0;background:var(--card);box-shadow:0 2px 8px rgba(0,0,0,.2);cursor:pointer;font-size:20px;z-index:2}
+.mimg{aspect-ratio:16/11;background:var(--chip)}
+.mimg img{width:100%;height:100%;object-fit:cover;display:block}
+.mb{padding:18px 20px calc(18px + env(safe-area-inset-bottom,0px))}
+.mb h3{margin:0;font-size:24px;font-weight:800;letter-spacing:-.01em;padding-right:44px}
+.mb .mp{margin-top:4px;font-size:17px}
+.mb .md{margin-top:10px;color:var(--muted)}
+.mb label{display:block;margin-top:18px;font-weight:700;font-size:14px}
+.mb textarea{display:block;width:100%;margin-top:6px;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:10px 12px;min-height:72px;resize:vertical}
+.madd{display:flex;gap:12px;align-items:center;margin-top:18px}
+.madd .step{height:54px}
+.madd .step button{width:46px;height:54px}
+.madd .go{margin-top:0;flex:1}
+.sheet{padding:20px 20px calc(20px + env(safe-area-inset-bottom,0px))}
+.toast{position:fixed;left:50%;top:calc(76px + env(safe-area-inset-top,0px));transform:translateX(-50%);background:var(--accent);color:var(--on-accent);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;z-index:50;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+
+footer .ft{padding-block:26px 40px;color:var(--muted);font-size:13px;display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--line)}
+.ft-row{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:center}
+.ft-badges{display:flex;gap:8px;flex-wrap:wrap}.ft-badges img{height:26px;width:auto;background:#fff;border-radius:6px;padding:3px 6px;border:1px solid var(--line)}
+.ft-legal{display:flex;flex-wrap:wrap;gap:4px 16px}.ft-legal a{text-decoration:none;min-height:44px;display:inline-flex;align-items:center;color:var(--ink)}
+.ft-legal a:hover{text-decoration:underline}
+.ft-fine{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:space-between;color:var(--faint)}
+.fvault{margin:0}
+@media (prefers-reduced-motion:no-preference){.modal{animation:up .24s cubic-bezier(.2,.8,.2,1)}@keyframes up{from{transform:translateY(28px);opacity:.5}to{transform:none;opacity:1}}}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+
+
+<header class="top" id="top"><div class="wrap">
+  <a class="brandmini" href="#"><img src="img/logo.webp" alt=""><b>MITRE</b></a>
+  <span class="spacer"></span>
+  <a class="tlink hide-s" data-brinco="mis-pedidos" href="/pedido/">Mis pedidos</a>
+  <button class="cartbtn" id="cartTop" type="button" aria-label="Ver carrito"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 7V6a6 6 0 0 1 12 0v1h2.2a1 1 0 0 1 1 1.1l-1.3 12.1A2 2 0 0 1 17.9 22H6.1a2 2 0 0 1-2-1.8L2.8 8.1A1 1 0 0 1 3.8 7H6zm2 0h8V6a4 4 0 0 0-8 0v1z"/></svg><span id="cartTopN" class="num">0</span></button>
+</div></header>
+
+<div class="notice"><div class="wrap">Tienda en preparación: puedes armar tu pedido y probar la caja. Los cobros reales se activan cuando Mitre conecte su cuenta de AZUL.</div></div>
+
+<main>
+<div class="wrap">
+  <div class="cover"><div class="img" role="img" aria-label="La terraza de Mitre"></div><img class="logo" src="img/logo.webp" alt="Mitre Restaurant &amp; Bar"></div>
+  <section class="info">
+    <div>
+      <h1>Mitre Restaurant &amp; Bar</h1>
+      <div class="sub"><span>Food, drinks &amp; music terrace</span><span>Pizzas</span><span>Sushi</span><span>Cortes</span><span>Serrallés</span></div>
+      <p class="tagline">#LetsMitre desde tu casa: los platos de la terraza, para llevar o a domicilio.</p>
+    </div>
+    <div class="modebox">
+      <div class="seg" role="radiogroup" aria-label="Cómo lo quieres">
+        <button type="button" role="radio" aria-checked="true" data-mode="delivery">Delivery</button>
+        <button type="button" role="radio" aria-checked="false" data-mode="pickup">Recoger</button>
+      </div>
+      <div class="facts" id="facts"></div>
+    </div>
+  </section>
+  <div class="searchrow"><label class="search" for="q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" type="search" placeholder="Buscar en Mitre" autocomplete="off"></label></div>
+
+  <div id="featWrap">
+    <div class="sec-h"><h2>Destacados</h2><small>Lo que más piden</small></div>
+    <div class="rail" id="rail"></div>
+  </div>
+</div>
+
+<nav class="tabs" aria-label="Categorías"><div class="wrap" id="tabs"></div></nav>
+
+<div class="wrap layout">
+  <div id="menu"></div>
+  <aside class="side" aria-label="Tu carrito"><h4>Tu carrito</h4><div id="sideCart"></div></aside>
+</div>
+</main>
+
+<footer><div class="wrap ft">
+  <div class="ft-row"><div class="ft-badges" aria-label="Pagos seguros"><img src="/img/pagos/visa.webp" alt="Visa"><img src="/img/pagos/mastercard.webp" alt="Mastercard"><img src="/img/pagos/visa-secure.webp" alt="Visa Secure"><img src="/img/pagos/mastercard-id-check.webp" alt="Mastercard ID Check"></div>
+  <nav aria-label="Legal" class="ft-legal"><a data-brinco="mis-pedidos" href="/pedido/">Mis pedidos</a><a href="/seguridad/">Políticas de seguridad</a><a href="/privacidad/">Privacidad</a><a href="/terminos/">Términos y entregas</a></nav></div>
+  <p class="fvault" data-brinco="vault-footer"></p>
+  <div class="ft-fine"><span>© 2026 Mitre Restaurant &amp; Bar · Tienda en Brinco, un producto de Sandscap SRL · Pagos procesados por AZUL</span><span>Reservas 829-345-6478 · José Amado Soler esq. Pablo Casals, Serrallés</span></div>
+</div></footer>
+
+<div class="vbar" id="vbar" hidden><button type="button" id="vbarBtn"></button></div>
+<div id="layer"></div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+const MENU=[{"cat": "Entradas", "items": [["Shrimp balls", "Rellenas de camarones y cubiertas de masa crocante, salsa de anguila y spicy mayo.", 645, "", 0], ["Tuna tartare", "Spicy Mayo, aceite sésamo, puerro, aguacate, salsa de anguila y miel.", 795, "Más vendido", 1], ["Croquetas ibéricas", "Jamón serrano y manchego con nuestro aioli de trufas blancas.", 595, "", 2], ["Pork belly tacos", "Crocante de cerdo en tortilla de trigo suave con guacamole, cole slaw y pesto de cilantro. (toppings se empacan por separado).", 645, "Recomendado", 3], ["Edamame", "Salteadas con yuzu, soya, sal marina y pepperoncini.", 495, "", 4], ["Mollejas de ternera", "Al grill. Super crocantes y acompañadas de limón.", 695, "Más vendido", 5], ["Esferas de gambas", "Camarones rellenos de queso de cabra en salsa pomodoro y un toque de pesto genovese.", 695, "", 6], ["Meatball sliders", "Albóndigas italianas rellenas de mozzarella, pan brioche casero, ragú napoletano, ricotta fresca, papas caseras.", 595, "", 7], ["Salmón & tuna taquitos", "Salmón y tuna mixto, wontón crocante, sésamo, spicy mayo.", 595, "", 8], ["Ensalada de quinoa", "Mixto de quinoas con camarones, queso de cabra, tomatitos, cebolla, manzana verde, berenjena, zucchini, rúcula.", 695, "", 9], ["Chicken Caesar", "Baby romana, tradicional dressing caesar, pollo, parmigiano.", 645, "", 10], ["Burrata", "Prosciutto, rúcula. mermelada casera de tomates, nueces caramelizadas, tostadas", 995, "", 11], ["Ricotta y focaccia chips", "Whipped ricotta, esencia de trufas, nueces, mermelada de melocotón", 595, "", 12], ["Berenjena parmigiana", "Ragú napoletano, mozzarella, parmigiano", 595, "", -1], ["Mozzarella marinara", "Crocante en salsa marinara, horneada en gratín de parmigiano", 545, "", -1], ["Croquetas de bacalao", "Bacalao, piperade de pimientos rojos, parmigiano.", 545, "", -1], ["Carpaccio de res", "Salsa tonnato, alioli de albahaca, rúcula, pistacho, parmigiano.", 695, "", -1], ["Carpaccio de carite", "Alcaparritas crocantes, puerro, limón, extra virgen.", 695, "Más vendido", -1], ["Ceviche", "Carite, trozos de batata confitada en naranja, aceite de cilantro, choclo, ligeramente picante.", 795, "", -1], ["Salpicón de mariscos", "Camarones, chipirones, pulpo, carite, vegetales, vinagreta de jerez.", 1095, "", -1]]}, {"cat": "Pizzas", "items": [["Pizza margherita", "Tomates Cherry.", 595, "", 20], ["Pizza brie", "Con queso brie, nueces y miel de trufas.", 695, "", 21], ["Pizza prosciutto y rúcula", "Pizza con prosciutto y rúcula.", 695, "", 22], ["Pizza pepperoni y stracciatella", "Pizza con pepperoni y stracciatella", 795, "Más vendido", 23], ["Focaccia genovese", "Romero, tomillo, sal marina, pimienta fresca, extra virgen y parmigiano.", 495, "", 24], ["Pizza mortadella y stracciatella", "Spicy hot honey.", 795, "", 25]]}, {"cat": "Sushis", "items": [["Mitre roll", "Empanizado, cream cheese, plátano maduro, aguacate, salsa de anguila y miel.", 695, "", 26], ["Salmón roll", "Cream cheese y puerro fino, cubierto de plátano maduro y salsa anguila.", 645, "Más vendido", 27], ["Tuna volcano roll", "Cream cheese y puerro, tope de tuna tartar y panko crocante.", 695, "", 28], ["Ma roll", "Camarón frito, cream cheese, cubierto en salmón flameado, spicy mayo, puerro, hilos de chili.", 615, "", 29], ["Luquino roll", "Tuna, salmón, cream cheese, frito en panko, salsa de anguila y miel.", 645, "", 30]]}, {"cat": "Mitre mains", "items": [["Korean chicken", "Pollo frito con sabores coreanos, crema amarilla, cremoso trufado, papas, spicy & sweet chili, jalapeños y vegetales encurtidos, ligeramente picante", 795, "", 31], ["Arroz crocante", "Pork belly & camarones, huevo poche y alioli.", 1195, "Recomendado", 32], ["Penne mitre", "Jugosa pechuga de pollo, crema de hongos porcini y bacon gratinado con queso manchego.", 795, "Más vendido", 33], ["Rigatoni maría andrea", "Camarones en crema de grana padano y crispy bacon.", 795, "Más vendido", 34], ["Mitre burger", "8oz con crema de porcini & gorgonzola, bacon y cebollas caramelizadas en pan brioche hecho en casa con truffle french fries.", 795, "", 35], ["Mongolian beef", "Puerro, y cama de arroz frito con plátano maduro.", 1095, "Recomendado", 36], ["Miso glazed salmón", "Cremoso de papas y edamames salteados.", 1295, "", 37], ["Risotto porcini", "Hongos mixtos, esencia de trufas, parmigiano.", 995, "", 38], ["Gambas jumbo", "7 unds por libra, a la brasa, toque de ajo, mantequilla, perejil italiano, limón, rúcula, parmigiano, papas cacio e pepe", 2695, "", 39], ["Milanesa de tenderloin", "Rúcula, tomatitos, parmigiano, cebolla roja, balsámico, extra virgen.", 1395, "", 40], ["Truffled Mac & Cheese", "salmón, camarones, quesos mixtos, esencia de trufas, parmigiano, pangrattato gratin.", 895, "Más vendido", 41], ["Costoletta parmigiana", "Lomo de cerdo finamente empanizado, ragú napoletano, gratinado con mozzarella, ensalada de rúcula, papines, parmigiano", 1295, "", -1], ["Risotto camarones y azafrán", "Stracciatella, tomates secos, prosciutto crocante", 995, "", -1], ["Spaghetti cacio e pepe", "Nuestra versión en rueda de grana padano, pimienta negra, tocineta.", 795, "", -1], ["Linguine gambas", "Gambas al horno de leña, ajo, perejil, extra virgen, pepperoncini.", 995, "", -1]]}, {"cat": "Cortes especiales", "items": [["Churrasco CAB 10 oz", "Papas crocantes al cacio e pepe, rúcula, parmigiano.", 2395, "", 46], ["Strip loin CAB 16 oz", "Nuestros cortes de carnes al grill vienen con papas crocantes a la cacio e pepe, rúcula y parmigiano.", 2995, "", 47], ["Flap meat CAB 10 oz", "Nuestros cortes de carnes al grill vienen con papas crocantes a la cacio e pepe, rúcula y parmigiano.", 1895, "", -1], ["Ribeye CAB 16 oz", "Nuestros cortes de carnes al grill vienen con papas crocantes a la cacio e pepe, rúcula y parmigiano.", 3495, "", -1], ["Strip loin CAB Prime 20 oz", "Papas cacio e pepe, rúcula, parmigiano.", 3695, "", -1]]}, {"cat": "Postres", "items": [["Tartino de Nutella", "Sin gluten, relleno de nutella y servido caliente con sorbete de frambuesa hecho en casa.", 695, "", 51], ["Profiteroles Nutella", "Profiteroles Nutella.", 595, "", 52], ["Profiteroles de crema pastelera", "Profiteroles de crema pastelera.", 545, "", 53], ["Lava cake", "Fondant de dulce de leche con centro cremoso, helado de vainilla, crumble de granola.", 645, "", 54], ["Mil hojas", "De arroz con leche y majarete cubierto con azúcar cristalizada.", 545, "", 55], ["Key lime", "Nuestra versión construida, relleno de mermelada de limón, mousse de limón amarillo, cobertura de chocolate blanco y crumble crocante.", 525, "", 56], ["Tsunami", "Blondie brownie, mousse de chocolate semi dulce y ganache de chocolate 70, avellanas crocantes y polvo de oro.", 695, "", 57], ["Tarta vasca brûlée", "Centro cremoso de queso, crust de azúcar, granella de pistacho, coulis de frutos rojos.", 695, "", 58]]}];
+const CFG={envio:150,deliveryMin:40,deliveryMax:55,pickupMin:25};
+const SK=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const P=[];MENU.forEach(c=>c.items.forEach(it=>P.push({id:SK(it[0]),cat:c.cat,name:it[0],desc:it[1],price:it[2],tag:it[3],img:it[4]})));
+const byId=Object.fromEntries(P.map(p=>[p.id,p]));
+const rd=n=>'RD$ '+n.toLocaleString('es-DO',{minimumFractionDigits:0,maximumFractionDigits:2});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $=id=>document.getElementById(id);
+const imgSrc=p=>p.img>=0?'img/'+p.img+'.webp':'';
+const track=(n,d)=>{try{if(window.Brinco)Brinco.track(n,d)}catch(e){}};
+
+/* carrito: líneas por plato + nota */
+const KEY='mitre-cart-v1';let cart=[];
+try{const c=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(c))cart=c.filter(l=>byId[l.id]&&l.qty>0)}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(cart))}catch(e){}};
+const count=()=>cart.reduce((a,l)=>a+l.qty,0);
+const sub=()=>cart.reduce((a,l)=>a+l.qty*byId[l.id].price,0);
+const qtyOf=id=>cart.filter(l=>l.id===id).reduce((a,l)=>a+l.qty,0);
+function add(id,qty,nota){nota=(nota||'').trim().slice(0,140);const l=cart.find(x=>x.id===id&&(x.nota||'')===nota);if(l)l.qty=Math.min(20,l.qty+qty);else cart.push({id,qty,nota});save();track('carrito',{producto:byId[id].name,total:byId[id].price*qty});render()}
+function setLine(i,q){if(q<=0)cart.splice(i,1);else cart[i].qty=Math.min(20,q);save();render()}
+
+/* modo */
+let mode='delivery';try{mode=localStorage.getItem('mitre-mode')||'delivery'}catch(e){}
+function facts(){$('facts').innerHTML=mode==='delivery'
+  ?`<div class="fact"><b class="num">${CFG.deliveryMin}–${CFG.deliveryMax} min</b><span>Entrega</span></div><div class="fact"><b class="num">${rd(CFG.envio)}</b><span>Envío</span></div><div class="fact"><b>5 pm</b><span>Afterwork</span></div>`
+  :`<div class="fact"><b class="num">${CFG.pickupMin} min</b><span>Listo para recoger</span></div><div class="fact"><b>Gratis</b><span>Sin envío</span></div><div class="fact"><b>5 pm</b><span>Afterwork</span></div>`;
+  document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-checked',b.dataset.mode===mode))}
+document.querySelector('.seg').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(!b)return;mode=b.dataset.mode;try{localStorage.setItem('mitre-mode',mode)}catch(e){}facts()});
+
+/* destacados */
+const feat=P.filter(p=>p.tag&&p.img>=0);
+$('rail').innerHTML=feat.map(p=>`<button class="feat" type="button" data-open="${p.id}"><div class="ph"><img src="${imgSrc(p)}" alt="" loading="lazy"><span class="plus" aria-hidden="true">+</span></div><div class="nm">${esc(p.name)}</div><div class="pr num">${rd(p.price)}</div></button>`).join('');
+
+/* pestañas y menú */
+const cats=MENU.map(c=>c.cat);
+$('tabs').innerHTML=cats.map((c,i)=>`<button class="tab" type="button" data-t="c-${SK(c)}" aria-current="${i===0}">${c}</button>`).join('');
+function rowHTML(p){const q=qtyOf(p.id);return `<button class="row" type="button" data-open="${p.id}" aria-label="${esc(p.name)}, ${rd(p.price)}"><div style="min-width:0"><div class="rn">${esc(p.name)}</div><div class="rp num">${rd(p.price)}</div>${p.desc?`<div class="rd">${esc(p.desc)}</div>`:''}${p.tag?`<span class="tag">${p.tag}</span>`:''}</div><div class="rimg${p.img>=0?'':' none'}">${p.img>=0?`<img src="${imgSrc(p)}" alt="" loading="lazy" width="116" height="116">`:''}${q?`<span class="qb num">${q}</span>`:`<span class="plus" aria-hidden="true">+</span>`}</div></button>`}
+function renderMenu(){
+  const term=$('q').value.trim().toLowerCase();
+  const match=p=>!term||(p.name+' '+p.desc+' '+p.cat).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(term.normalize('NFD').replace(/[\u0300-\u036f]/g,''));
+  const html=MENU.map(c=>{const items=P.filter(p=>p.cat===c.cat&&match(p));if(!items.length)return '';
+    return `<section class="cat" id="c-${SK(c.cat)}"><h3>${c.cat}</h3><div class="cnt">${items.length} ${items.length===1?'plato':'platos'}</div><div class="rows">${items.map(rowHTML).join('')}</div></section>`}).join('');
+  $('menu').innerHTML=html||`<p class="empty-s">No encontramos "${esc(term)}". Prueba con otra palabra.</p>`;
+  $('featWrap').hidden=!!term;
+  observe();
+}
+$('q').addEventListener('input',renderMenu);
+$('tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;const s=document.getElementById(b.dataset.t);if(s)s.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
+let io;function observe(){if(io)io.disconnect();io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){$('tabs').querySelectorAll('.tab').forEach(t=>{const on=t.dataset.t===en.target.id;t.setAttribute('aria-current',on);if(on)t.scrollIntoView({block:'nearest',inline:'nearest'})})}}),{rootMargin:'-35% 0px -60% 0px'});document.querySelectorAll('.cat').forEach(s=>io.observe(s))}
+addEventListener('scroll',()=>$('top').classList.toggle('scrolled',scrollY>8),{passive:true});
+
+/* carrito */
+function cartHTML(){
+  if(!cart.length)return '<p class="cempty">Tu carrito está vacío. Toca un plato para agregarlo.</p>';
+  return `<div class="cl">${cart.map((l,i)=>{const p=byId[l.id];return `<div class="ci">${p.img>=0?`<img src="${imgSrc(p)}" alt="">`:'<span class="ph0"></span>'}<div style="min-width:0"><div class="n">${esc(p.name)}</div>${l.nota?`<div class="x">“${esc(l.nota)}”</div>`:''}<div class="p num">${rd(p.price*l.qty)}</div></div><div class="step"><button type="button" data-line="${i}" data-d="-1" aria-label="Quitar uno de ${esc(p.name)}">${l.qty===1?'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>':'−'}</button><span class="num">${l.qty}</span><button type="button" data-line="${i}" data-d="1" aria-label="Agregar uno de ${esc(p.name)}">+</button></div></div>`}).join('')}</div>
+  <div class="ctot"><span>Subtotal</span><span class="num">${rd(sub())}</span></div><div class="cnote">ITBIS (18 %) y ${mode==='delivery'?'envío':'recogida'} se calculan en la caja.</div>
+  <button class="go" type="button" data-checkout><span>Ir a pagar</span><span class="num">${rd(sub())}</span></button>
+  <div class="pay-hint">Tarjeta con AZUL o <span class="bwm">brinco</span> con un toque</div>`}
+function render(){
+  const n=count();
+  $('cartTopN').textContent=n;
+  $('sideCart').innerHTML=cartHTML();
+  $('vbar').hidden=!n;
+  $('vbarBtn').innerHTML=`<span class="cnt num">${n}</span><span>Ver carrito</span><span class="num">${rd(sub())}</span>`;
+  renderMenu();
+  if(view==='cart'){if(n)openCart();else closeLayer()}
+}
+document.addEventListener('click',e=>{
+  const o=e.target.closest('[data-open]');if(o){openItem(o.dataset.open);return}
+  const l=e.target.closest('[data-line]');if(l){const i=+l.dataset.line;setLine(i,cart[i].qty+(+l.dataset.d));return}
+  if(e.target.closest('[data-checkout]')){if(!count())return;closeLayer();if(window.Brinco)Brinco.checkout();else toast('La caja está cargando, intenta de nuevo.')}
+});
+$('cartTop').onclick=()=>{if(innerWidth>=1024&&count()){document.querySelector('.side').scrollIntoView({block:'nearest'});return}openCart()};
+$('vbarBtn').onclick=openCart;
+
+/* capas */
+let view=null,lastFocus=null;const layer=$('layer');
+function show(html,label){lastFocus=lastFocus||document.activeElement;layer.innerHTML=`<div class="scrim" data-scrim><div class="modal" role="dialog" aria-modal="true" aria-label="${label}">${html}</div></div>`;document.documentElement.style.overflow='hidden';const f=layer.querySelector('.mx');if(f)f.focus({preventScroll:true})}
+function closeLayer(){view=null;layer.innerHTML='';document.documentElement.style.overflow='';if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});lastFocus=null}
+function openCart(){if(!count()){toast('Agrega un plato primero');return}view='cart';show(`<button class="mx" type="button" data-x aria-label="Cerrar">×</button><div class="sheet"><h4>Tu carrito</h4>${cartHTML()}</div>`,'Tu carrito')}
+function openItem(id){const p=byId[id];view='item';let q=1;
+  const draw=()=>show(`<button class="mx" type="button" data-x aria-label="Cerrar">×</button>${p.img>=0?`<div class="mimg"><img src="${imgSrc(p)}" alt="${esc(p.name)}"></div>`:''}<div class="mb"><h3>${esc(p.name)}</h3><div class="mp num">${rd(p.price)}</div>${p.desc?`<p class="md">${esc(p.desc)}</p>`:''}${p.tag?`<span class="tag">${p.tag}</span>`:''}
+    <label for="nota">Instrucciones especiales <span style="font-weight:400;color:var(--muted)">(opcional)</span></label><textarea id="nota" maxlength="140" placeholder="Ej.: sin cebolla, término medio…"></textarea>
+    <div class="madd"><div class="step"><button type="button" data-q="-1" aria-label="Menos">−</button><span class="num" id="mq">${q}</span><button type="button" data-q="1" aria-label="Más">+</button></div><button class="go" type="button" data-addit><span>Agregar ${q}</span><span class="num" id="mt">${rd(p.price*q)}</span></button></div></div>`,p.name);
+  draw();
+  layer.onclick=e=>{
+    if(e.target.matches('[data-scrim]')||e.target.closest('[data-x]')){closeLayer();return}
+    const b=e.target.closest('[data-q]');if(b&&view==='item'){q=Math.max(1,Math.min(20,q+(+b.dataset.q)));$('mq').textContent=q;layer.querySelector('[data-addit] span').textContent='Agregar '+q;$('mt').textContent=rd(p.price*q);return}
+    if(e.target.closest('[data-addit]')&&view==='item'){add(id,q,$('nota').value);closeLayer();toast(`${q} × ${p.name} en tu carrito`);return}
+  };
+}
+layer.addEventListener('click',e=>{if(view==='cart'&&(e.target.matches('[data-scrim]')||e.target.closest('[data-x]')))closeLayer()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&view)closeLayer()});
+let tt;function toast(m){const t=$('toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,1800)}
+
+/* Puente con Brinco Kit: la caja lee el carrito de aquí; el Wallet valida precios con brinco.json */
+window.BrincoCart={
+  items:()=>cart.map(l=>{const p=byId[l.id];const it={name:p.name,detail:'',qty:l.qty,unit:p.price,img:p.img>=0?'/img/'+p.img+'.webp':'',sku:{p:p.id}};if(l.nota)it.nota=l.nota;return it}),
+  total:()=>sub(),
+  clear:()=>{cart=[];save();render()},
+  close:()=>closeLayer()
+};
+facts();render();
+</script>
+
+</body>
+</html>
